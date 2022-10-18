@@ -32,11 +32,11 @@ class MoviesDAO(BaseDAO[Movie]):
 class UsersDAO(BaseDAO[User]):
     __model__ = User
 
-    def create(self, login, password):
+    def create_user(self, email, password):
         try:
             self._db_session.add(
                 User(
-                    email=login,
+                    email=email,
                     password=generate_password_hash(password)
                 )
             )
@@ -45,17 +45,17 @@ class UsersDAO(BaseDAO[User]):
             print(e)
             self._db_session.rollback()
 
-    def get_user_by_login(self, login):
+    def get_user_by_email(self, email):
         try:
-            stmt = self._db_session.query(self.__model__).filter(self.__model__.email == login).one()
+            stmt = self._db_session.query(self.__model__).filter(self.__model__.email == email).one()
             return stmt
         except Exception as e:
             print(e)
             return {}
 
-    def update(self, login, data):
+    def update_user(self, email, data):
         try:
-            self._db_session.query(self.__model__).filter(self.__model__.email == login).update(data)
+            self._db_session.query(self.__model__).filter(self.__model__.email == email).update(data)
             self._db_session.commit()
             print("Пользователь обновлен")
         except Exception as e:

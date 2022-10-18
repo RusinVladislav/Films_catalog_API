@@ -8,7 +8,7 @@ api = Namespace('user')
 
 @api.route('/')
 class RegisterView(Resource):
-    @api.marshal_with(user, as_list=True, code=200, description='OK')
+    @api.marshal_with(user, code=200, description='OK')
     def patch(self):
         data = request.json
         header = request.headers.environ.get('HTTP_AUTHORIZATION').replace('Bearer ', '')
@@ -20,11 +20,12 @@ class RegisterView(Resource):
         data = request.json
         header = request.headers.environ.get('HTTP_AUTHORIZATION').replace('Bearer ', '')
 
-        return user_service.get_user_by_token(refresh_token=header)
+        return user_service.get_user_by_token(data=data, refresh_token=header)
 
 
 @api.route('/password/')
 class LoginView(Resource):
+    @api.marshal_with(user, as_list=True, code=200, description='OK')
     def put(self):
         data = request.json
         header = request.headers.environ.get('HTTP_AUTHORIZATION').replace('Bearer ', '')
