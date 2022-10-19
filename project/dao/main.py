@@ -40,6 +40,7 @@ class UsersDAO(BaseDAO[User]):
                     password=generate_password_hash(password)
                 )
             )
+            self._db_session.commit()
             print('Пользователь добавлен')
         except Exception as e:
             print(e)

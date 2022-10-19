@@ -1,7 +1,6 @@
 import base64
 import calendar
 import hashlib
-import hmac
 import datetime
 
 import jwt
@@ -22,15 +21,7 @@ def generate_password_hash(password: str) -> str:
 
 
 def compare_passwords(password_hash, other_password) -> bool:
-    return hmac.compare_digest(
-        base64.b64decode(password_hash),
-        hashlib.pbkdf2_hmac(
-            hash_name="sha256",
-            password=password_hash.encode("utf-8"),
-            salt=current_app.config["PWD_HASH_SALT"],
-            iterations=current_app.config["PWD_HASH_ITERATIONS"],
-        )
-    )
+    return password_hash == generate_password_hash(other_password)
 
 
 def generate_tokens(email, password, password_hash, refresh=False):
@@ -74,10 +65,6 @@ def update_token(refresh_token):
     password = data.get('password')
 
     return generate_tokens(email=email, password=password, password_hash=None, refresh=True)
-
-
-def approve_refresh_token(refresh_token):
-    pass
 
 
 def get_data_from_token(refresh_token):
