@@ -3,7 +3,6 @@ from werkzeug.exceptions import NotFound
 
 from project.dao.base import BaseDAO
 from project.models import Genre, Director, Movie, User
-from project.tools.security import generate_password_hash
 
 
 class GenresDAO(BaseDAO[Genre]):
@@ -37,7 +36,7 @@ class UsersDAO(BaseDAO[User]):
             self._db_session.add(
                 User(
                     email=email,
-                    password=generate_password_hash(password)
+                    password=password
                 )
             )
             self._db_session.commit()

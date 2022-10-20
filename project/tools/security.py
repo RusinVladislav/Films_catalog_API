@@ -2,6 +2,7 @@ import base64
 import calendar
 import hashlib
 import datetime
+import hmac
 
 import jwt
 from flask import current_app
@@ -21,7 +22,7 @@ def generate_password_hash(password: str) -> str:
 
 
 def compare_passwords(password_hash, other_password) -> bool:
-    return password_hash == generate_password_hash(other_password)
+    return hmac.compare_digest(password_hash, generate_password_hash(other_password))
 
 
 def generate_tokens(email, password, password_hash, refresh=False):
