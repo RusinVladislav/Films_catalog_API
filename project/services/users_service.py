@@ -56,4 +56,4 @@ class UsersService:
                 email=user.email
             )
 
-            return self.get_user_by_email(user.get("email"))
+            return self.check(email=user.email, password=data.get('password_2'))
