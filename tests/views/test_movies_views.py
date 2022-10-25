@@ -6,7 +6,7 @@ from project.models import Movie
 class TestMoviesView:
     @pytest.fixture
     def movie(self, db):
-        obj = Movie(name="movie")
+        obj = Movie(title="movie")
         db.session.add(obj)
         db.session.commit()
         return obj
@@ -14,7 +14,7 @@ class TestMoviesView:
     def test_many(self, client, movie):
         response = client.get("/movies/")
         assert response.status_code == 200
-        assert response.json == [{"id": movie.id, "name": movie.name}]
+        assert response.json == [{"id": movie.id, "title": movie.title}]
 
     def test_movie_pages(self, client, movie):
         response = client.get("/movies/?page=1")
@@ -28,7 +28,7 @@ class TestMoviesView:
     def test_movie(self, client, movie):
         response = client.get("/movies/1/")
         assert response.status_code == 200
-        assert response.json == {"id": movie.id, "name": movie.name}
+        assert response.json == {"id": movie.id, "title": movie.title}
 
     def test_movie_not_found(self, client, movie):
         response = client.get("/movies/2/")

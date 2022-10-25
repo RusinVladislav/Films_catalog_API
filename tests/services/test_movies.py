@@ -13,10 +13,10 @@ class TestMoviesService:
     @patch('project.dao.MoviesDAO')
     def movies_dao_mock(self, dao_mock):
         dao = dao_mock()
-        dao.get_by_id.return_value = Movie(id=1, name='test_movie')
+        dao.get_by_id.return_value = Movie(id=1, title='test_movie')
         dao.get_all.return_value = [
-            Movie(id=1, name='test_movie_1'),
-            Movie(id=2, name='test_movie_2'),
+            Movie(id=1, title='test_movie_1'),
+            Movie(id=2, title='test_movie_2'),
         ]
         return dao
 
@@ -26,7 +26,7 @@ class TestMoviesService:
 
     @pytest.fixture
     def movie(self, db):
-        obj = Movie(name="movie")
+        obj = Movie(title="movie")
         db.session.add(obj)
         db.session.commit()
         return obj
