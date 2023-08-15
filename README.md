@@ -20,7 +20,7 @@ Back-end for films catalog like kinopoisk
 ## Start app
 1. Clone project
    ```
-   https://github.com/AndrewIsaev/Films_catalog_API.git
+   https://github.com/RusinVladislav/Films_catalog_API
 2. Create virtual environment
    ```
     python3 -m venv venv
