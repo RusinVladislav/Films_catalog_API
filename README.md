@@ -1,49 +1,43 @@
-# Исходный код для курсовой работы №3
+# Films catalog
+Back-end for films catalog like kinopoisk
+***
+## Features
+- Authorization/Authentication users by jwt
+- Add movies to bookmarks
+- Films, directors, genres
 
-## Описание проекта
-- Установка зависимостей
-```shell
-pip install -r requirements.txt
+***
+## Technology stack
+- Python 3.10.6
+- Flask 2.0.2
+- flask-restx 0.5.1
+- Flask-SQLAlchemy 2.5.1
+- Jinja2 3.0.2
+- marshmallow 3.14.0
+- PyJWT 2.6.0
 
-pip install -r requirements.dev.txt
-```
-
-- Создание моделей (очистит БД и создаст все модели, указанные в импорте)
-```shell
-python create_tables.py
-```
-
-- Загрузка данных в базу
-```shell
-python load_fixture.py
-```
-Скрпит читает файл fixtures.json и загружает данные в базу. Если данные уже загружены - выводит соответсвующее сообщение. 
-
-## Запуск проекта
-
-### Bash (Linux/MACOS)
-```shell
-export FLASK_APP=run.py
-export FLASK_ENV='development'
-flask run
-```
-
-### CMD (Windows)
-```shell
-set FLASK_APP=run.py
-set FLASK_ENV=development
-flask run
-```
-
-### PowerShell (Windows)
-```shell
-$env:FLASK_APP = "run"
-$env:FLASK_ENV = "development"
-flask run
-```
-
-## Запуск тестов
-```shell
-pytest .
-```
-
+***
+## Start app
+1. Clone project
+   ```
+   https://github.com/AndrewIsaev/Films_catalog_API.git
+2. Create virtual environment
+   ```
+    python3 -m venv venv
+3. Activate virtual environment
+   ```
+    source venv/bin/activate
+4. Install requirements
+   ```
+    pip install -r requirements.txt
+5. Run flask application
+   ```
+    export FLASK_APP=run.py
+    flask run
+***
+***
+## Project structure
+- `dao/`: models and work with database
+- `service/`: bissness logics
+- `tests/`: tests
+- `views/`: views
